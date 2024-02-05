@@ -1,6 +1,6 @@
 
 import pickle
-from data_preprocessing import DataPreprocessing
+from .data_preprocessing import DataPreprocessing
 
 
 with open ('unigram_inverted_index.dat', 'rb') as f:
@@ -32,12 +32,24 @@ class BooleanQueries:
     def or_not_operation(set1, set2):
         complement_set2 = universal_set - set2
         return set1.union(complement_set2)
-
     
+    
+    def query_form(self):
+        obj=DataPreprocessing(self.query)
+        obj.process_all()
+        query=obj.data.split()
+        query_x=[]
+        query_x.append(query[0])
+        for i in range(1,len(query)):
+            query_x.append(self.operations[i-1])
+            query_x.append(query[i])
+        return ' '.join(query_x)
+        
     def processing_operations(self):
         obj=DataPreprocessing(self.query)
         obj.process_all()
         query=obj.data.split()
+        
         result=inverted_index[query[0]][0]
         for i in range(1,len(query)):
             key=query[i]

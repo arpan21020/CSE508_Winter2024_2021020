@@ -1,5 +1,6 @@
 import pickle
-from data_preprocessing import DataPreprocessing
+
+from .data_preprocessing import DataPreprocessing
 
 
 with open ('positional_index.dat', 'rb') as f:
@@ -17,7 +18,6 @@ class PhraseQueries:
         for i in range(1,len(query)):
             key=query[i]
             resulting_docs=resulting_docs.intersection(set(positional_index[key][0].keys()))
-        print(resulting_docs)
         
         output_files=[]
         for doc in resulting_docs:
@@ -31,6 +31,3 @@ class PhraseQueries:
             if(0 not in bit):
                 output_files.append(doc)
         return output_files       
-
-obj=PhraseQueries("Works great as a guitar bench mat. Not rugged enough for abuse but if you take care of it, it will take care of you. Makes organization of workspace much easier because screws won't roll around. Color is good too.")
-print(obj.processing_query())
