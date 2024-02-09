@@ -1,1 +1,1 @@
-puts extra picks right need them
+puts extra picks right need
