@@ -17,7 +17,7 @@ def menu():
     print("-"*20)
 def samples():
     offset=random.randint(0,990)
-    for i in range(1,6):
+    for i in range(1+offset,6+offset):
         print("\n\033[1mBefor Preprocessing:\033[0m")
         
         print(f"Sample File {i} :")

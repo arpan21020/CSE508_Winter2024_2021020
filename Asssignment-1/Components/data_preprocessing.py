@@ -12,9 +12,12 @@ class DataPreprocessing:
     
     def tokenization(self):
         self.data=nltk.tokenize.word_tokenize(self.data)
+        self.data= ' '.join(self.data)
+        
+        
     def stop_word_removal(self):
         stop_words = set(nltk.corpus.stopwords.words('english'))
-        self.data = [word for word in self.data if word not in stop_words]
+        self.data = [word for word in self.data.split() if word not in stop_words]
         self.data= ' '.join(self.data)
         
     def remove_punctuation(self):
@@ -30,12 +33,14 @@ class DataPreprocessing:
     
     def process_all(self):
         self.lowercase()
-        self.tokenization()
         self.stop_word_removal()
+        self.tokenization()
         self.remove_punctuation()
-        self.remove_blank_spaces() 
-        
+        self.remove_blank_spaces()
+    def print_data(self):
+        print(self.data)
 
-    
-    
+
+
+
     

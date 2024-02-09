@@ -49,8 +49,10 @@ class BooleanQueries:
         obj=DataPreprocessing(self.query)
         obj.process_all()
         query=obj.data.split()
-        
-        result=inverted_index[query[0]][0]
+        if(query[0] in inverted_index.keys()):
+            result=inverted_index[query[0]][0]
+        else:
+            result=set()
         for i in range(1,len(query)):
             key=query[i]
             if(key in inverted_index.keys()):                
