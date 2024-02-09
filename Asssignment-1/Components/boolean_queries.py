@@ -53,15 +53,25 @@ class BooleanQueries:
         result=inverted_index[query[0]][0]
         for i in range(1,len(query)):
             key=query[i]
-            
-            if self.operations[i-1]=='AND':
-                result=self.and_operation(result,inverted_index[key][0]) 
-            elif self.operations[i-1]=='OR':
-                result=self.or_operation(result,inverted_index[key][0])
-            elif self.operations[i-1]=='OR NOT':
-                result=self.or_not_operation(result,inverted_index[key][0])
-            elif self.operations[i-1]=='AND NOT':
-                result=self.and_not_operation(result,inverted_index[key][0])
+            if(key in inverted_index.keys()):                
+                if self.operations[i-1]=='AND':
+                    result=self.and_operation(result,inverted_index[key][0]) 
+                elif self.operations[i-1]=='OR':
+                    result=self.or_operation(result,inverted_index[key][0])
+                elif self.operations[i-1]=='OR NOT':
+                    result=self.or_not_operation(result,inverted_index[key][0])
+                elif self.operations[i-1]=='AND NOT':
+                    result=self.and_not_operation(result,inverted_index[key][0])
+            else:
+                if self.operations[i-1]=='AND':
+                    result=self.and_operation(result,set()) 
+                elif self.operations[i-1]=='OR':
+                    result=self.or_operation(result,set())
+                elif self.operations[i-1]=='OR NOT':
+                    result=self.or_not_operation(result,set())
+                elif self.operations[i-1]=='AND NOT':
+                    result=self.and_not_operation(result,set())
+                
         return result
     
 

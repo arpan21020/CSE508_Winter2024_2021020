@@ -3,8 +3,8 @@ from .data_preprocessing import DataPreprocessing
 
 def datasetGen():
         directory_path = './text_files'
-
-
+        if not os.path.exists('./Dataset'):
+            os.makedirs('./Dataset')
         file_list = os.listdir(directory_path)
 
         for filename in file_list:

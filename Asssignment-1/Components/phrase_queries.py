@@ -14,12 +14,19 @@ class PhraseQueries:
         obj=DataPreprocessing(self.query)
         obj.process_all()
         query=obj.data.split()
-        resulting_docs=set(positional_index[query[0]][0].keys())
+        if(query[0] in positional_index.keys()):
+            resulting_docs=set(positional_index[query[0]][0].keys())
+        else:
+            resulting_docs=set()
         for i in range(1,len(query)):
             key=query[i]
-            resulting_docs=resulting_docs.intersection(set(positional_index[key][0].keys()))
-        
+            if(key in positional_index.keys()):
+                resulting_docs=resulting_docs.intersection(set(positional_index[key][0].keys()))
+            else:
+                resulting_docs=set()
         output_files=[]
+        if(len(resulting_docs)==0):
+            return output_files
         for doc in resulting_docs:
             positions=positional_index[query[0]][0][doc]
             bit=[0]*len(query)

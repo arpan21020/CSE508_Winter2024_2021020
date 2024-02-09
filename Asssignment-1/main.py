@@ -1,16 +1,22 @@
 from Components.generatingDatasets import datasetGen
 from Components.boolean_queries import BooleanQueries
 from Components.phrase_queries import PhraseQueries
-
+from Components.unigram_inverted_index import inverted_index
+from Components.positional_index import positional_index
+import random
 def menu():
     print("\n" + "-"*20)
     print(" "*5 + "Menu:")
     print("-"*20)
-    print("1. \033[1m5 sample files before and after performing reprocessing\033[0m")
-    print("2. \033[1mBoolean Queries\033[0m")
-    print("2. \033[1mPhrase Queries\033[0m")
+    print("1. \033[1mGenerate Unigram Inverted Index\033[0m")
+    print("2. \033[1mGenerate Positional Index\033[0m")
+    print("3. \033[1m5 sample files before and after performing preprocessing\033[0m")
+    print("4. \033[1mBoolean Queries\033[0m")
+    print("5. \033[1mPhrase Queries\033[0m")
+    print("6. \033[1mExit\033[0m")
     print("-"*20)
 def samples():
+    offset=random.randint(0,990)
     for i in range(1,6):
         print("\n\033[1mBefor Preprocessing:\033[0m")
         
@@ -18,7 +24,7 @@ def samples():
         with open(f'./text_files/file{i}.txt', 'r') as file:
             print(file.read())
         print("\n")
-        print("\n\033[1mAfter Reprocessing:\033[0m")
+        print("\n\033[1mAfter Preprocessing:\033[0m")
         print(f"Sample File {i} :")
         with open(f'./Dataset/file{i}.txt', 'r') as file:
             print(file.read())
@@ -60,11 +66,17 @@ if __name__ == "__main__":
         menu()
         choice = input("Choose an option: ")
         if choice == "1":
-            samples()
+            inverted_index()
         elif choice == "2":
-            boolean_queries()
+            positional_index()
         elif choice == "3":
+            samples()
+        elif choice == "4":
+            boolean_queries()
+        elif choice == "5":
             phrase_queries()
+        elif choice == "6":
+            break
         else:
             print("Invalid choice. Please choose a valid option.")
         
